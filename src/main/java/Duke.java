@@ -1,34 +1,83 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
 
-    static String[][] myTasks = new String[100][2];
-    static int num = 0;
+    private ArrayList<Task> myTasks;
 
     public static void main(String[] args) {
-
-        printHello();
+        Duke duke = new Duke();
+        duke.hello();
 
         String inData;
         Scanner scan = new Scanner(System.in);
-        inData = scan.nextLine();
-        while (!inData.equals("bye")) {
-            String split[] = inData.split(" ");
-            if (inData.equals("list")) {
-                listTask();
-            } else if (split[0].equals("done")) {
-                updateTask(Integer.parseInt(split[1]));
+
+        while(true) {
+            inData = scan.nextLine();
+            if(!inData.equals("bye")) {
+                duke.handleCommand(inData);
             } else {
-                addTask(inData);
-                num ++;
+                duke.bye();
+                break;
             }
             System.out.println("");
-            inData = scan.nextLine();
         }
-        printBye();
     }
 
-    public static void printHello() {
+    public Duke() {
+        this.myTasks = new ArrayList<Task>();
+    }
+
+    public void handleCommand(String inData) {
+        String[] split = inData.split(" ");
+        if (inData.equals("")) {
+            this.print("Input is empty.");
+        } else if (inData.equals("list")) {
+            this.listTask();
+        } else if (split.length == 2 && split[0].equals("done")) {
+            this.doneTask(Integer.parseInt(split[1]));
+        } else {
+            this.addTask(inData);
+        }
+    }
+
+    public void addTask(String task) {
+        Task newTask = new Task(task);
+        myTasks.add(newTask);
+        printLine();
+        printIndent();
+        System.out.println("added: " + task);
+        printLine();
+    }
+
+    public void doneTask(int index) {
+        if (index > 0 && index <= myTasks.size()) {
+            Task doneTask = myTasks.get(index - 1);
+            doneTask.setDone();
+        } else {
+            this.print("Alert: Index out of range.");
+        }
+    }
+
+    public void listTask() {
+        int i = 0;
+        printLine();
+        if (myTasks.size() == 0) {
+            printIndent();
+            System.out.println("Your list is empty now.");
+        } else {
+            printIndent();
+            System.out.println("Here are the tasks in your list: ");
+            for (Task task : myTasks) {
+                printIndent();
+                i++;
+                System.out.println(i + ".[" + task.getStatusIcon() + "] " + task.getName());
+            }
+        }
+        printLine();
+    }
+
+    public void hello() {
         printLine();
         printIndent();
         System.out.println("Hello! I'm Duke");
@@ -38,62 +87,26 @@ public class Duke {
         System.out.println("");
     }
 
-
-    public static void printBye() {
+    public void bye() {
         printLine();
         printIndent();
         System.out.println("Bye. Hope to see you again soon!");
         printLine();
     }
 
-    public static void printLine() {
-        int space = 4;
-        System.out.printf("%" + space + "s", "");
-        System.out.println("____________________________________________________________");
+    public void print(String output) {
+        this.printLine();
+        this.printIndent();
+        System.out.println(output);
+        printLine();
     }
 
-    public static void printIndent() {
+    public void printLine() {
+        System.out.println("    ____________________________________________________________");
+    }
+
+    public void printIndent() {
         int space = 5;
         System.out.printf("%" + space + "s", "");
     }
-
-    public static void listTask() {
-        printLine();
-        printIndent();
-        System.out.println("Here are the tasks in your list: ");
-        for (int i = 0; i < num; i++) {
-            String status = "x";
-            if (myTasks[i][1].equals("true")) {
-                status = "/";
-            }
-
-            printIndent();
-            int j = i + 1;
-            System.out.println(j + ".["  + status + "] "+ myTasks[i][0]);
-        }
-        printLine();
-    }
-
-    public static void addTask(String task) {
-        myTasks[num][0] = task;
-        myTasks[num][1] = "false";
-        printLine();
-        printIndent();
-        System.out.println("added: " + task);
-        printLine();
-    }
-
-    public static void updateTask(int index) {
-        myTasks[index - 1][1] = "true";
-
-        printLine();
-        printIndent();
-        System.out.println("Nice! I've marked this task as done: ");
-        printIndent();
-        System.out.println("  [/] "+ myTasks[index - 1][0]);
-        printLine();
-    }
-
 }
-
-
