@@ -1,39 +1,19 @@
-
 public class Task {
 
-    private String taskName;
-    private boolean isDone;
-    //private String status;
+    protected String description;
+    //private boolean isDone;
 
-    public Task(String task) {
-        this.taskName = task;
-        this.isDone = false;
+    public Task(String description) {
+        this.description = description;
+        //this.isDone = false;
     }
 
-    public void setName(String task) {
-        this.taskName = task;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public void setDone() {
-        this.isDone = true;
-        printLine();
-        printIndent();
-        System.out.println("Nice! I've marked this task as done: ");
-        printIndent();
-        System.out.println("  [/] "+ this.taskName);
-        printLine();
-    }
-
-    public String getName() {
-        return taskName;
-    }
-
-    public boolean getStatus() {
-        return isDone;
-    }
-
-    public String getStatusIcon() {
-        return isDone? "/" : "x";
+    public String getDescription() {
+        return description;
     }
 
     public void printLine() {

@@ -1,9 +1,11 @@
+import javafx.event.Event;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
 
-    private ArrayList<Task> myTasks;
+    private ArrayList<Todo> myTasks;
 
     public static void main(String[] args) {
         Duke duke = new Duke();
@@ -25,7 +27,7 @@ public class Duke {
     }
 
     public Duke() {
-        this.myTasks = new ArrayList<Task>();
+        this.myTasks = new ArrayList<Todo>();
     }
 
     public void handleCommand(String inData) {
@@ -34,26 +36,61 @@ public class Duke {
             this.print("Input is empty.");
         } else if (inData.equals("list")) {
             this.listTask();
-        } else if (split.length == 2 && split[0].equals("done")) {
+        } else if (split[0].equals("done")) {
             this.doneTask(Integer.parseInt(split[1]));
-        } else {
-            this.addTask(inData);
+        } else if (split[0].equals("todo")) {
+            this.addTodo(inData.substring(5));
+        } else if (split[0].equals("deadline")) {
+            this.addDeadline(inData.substring(9));
+        } else if (split[0].equals("event")) {
+            this.addEvent(inData.substring(6));
         }
     }
 
-    public void addTask(String task) {
-        Task newTask = new Task(task);
+    public void addTodo(String task) {
+        Todo newTask = new Todo(task);
         myTasks.add(newTask);
+
         printLine();
-        printIndent();
-        System.out.println("added: " + task);
+        printIndented("Got it. I've added this task: ");
+        printIndented("  " + newTask.toString());
+        printIndented("Now you have " + myTasks.size() + " tasks in the list.");
         printLine();
     }
 
+    public void addDeadline(String task) {
+        String[] split = task.split("/");
+        String by = split[1].substring(3);
+        Todo newTask = new Deadline(split[0], by);
+        myTasks.add(newTask);
+        printLine();
+        printIndented("Got it. I've added this task: ");
+        printIndented("  " + newTask.toString());
+        printIndented("Now you have " + myTasks.size() + " tasks in the list.");
+        printLine();
+    }
+
+    public void addEvent(String task) {
+        String[] split = task.split("/");
+        String at = split[1].substring(3);
+        Todo newTask = new Events(split[0], at);
+        myTasks.add(newTask);
+        printLine();
+        printIndented("Got it. I've added this task: ");
+        printIndented("  " + newTask.toString());
+        printIndented("Now you have " + myTasks.size() + " tasks in the list.");
+        printLine();
+    }
+
+
     public void doneTask(int index) {
         if (index > 0 && index <= myTasks.size()) {
-            Task doneTask = myTasks.get(index - 1);
+            Todo doneTask = myTasks.get(index - 1);
             doneTask.setDone();
+            printLine();
+            printIndented("Nice! I've marked this task as done: ");
+            printIndented(doneTask.toString());
+            printLine();
         } else {
             this.print("Alert: Index out of range.");
         }
@@ -66,12 +103,10 @@ public class Duke {
             printIndent();
             System.out.println("Your list is empty now.");
         } else {
-            printIndent();
-            System.out.println("Here are the tasks in your list: ");
+            printIndented("Here are the tasks in your list: ");
             for (Task task : myTasks) {
-                printIndent();
                 i++;
-                System.out.println(i + ".[" + task.getStatusIcon() + "] " + task.getName());
+                printIndented(i + "." + task.toString());
             }
         }
         printLine();
@@ -79,10 +114,8 @@ public class Duke {
 
     public void hello() {
         printLine();
-        printIndent();
-        System.out.println("Hello! I'm Duke");
-        printIndent();
-        System.out.println("What can I do for you?");
+        printIndented("Hello! I'm Duke");
+        printIndented("What can I do for you?");
         printLine();
         System.out.println("");
     }
@@ -108,5 +141,11 @@ public class Duke {
     public void printIndent() {
         int space = 5;
         System.out.printf("%" + space + "s", "");
+    }
+
+    public void printIndented(String output) {
+        int space = 5;
+        System.out.printf("%" + space + "s", "");
+        System.out.println(output);
     }
 }
