@@ -22,6 +22,6 @@ public class Deadline extends Todo {
 
     @Override
     public String toString() {
-        return "[" + taskType + "]["+ getStatusIcon() +"] " + description + "(by: " + by + ")";
+        return "[" + taskType + "]["+ getStatusIcon() +"] " + description + " (by: " + by + ")";
     }
 }

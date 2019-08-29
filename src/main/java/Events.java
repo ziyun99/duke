@@ -18,6 +18,6 @@ public class Events extends Todo {
 
     @Override
     public String toString() {
-        return "[" + taskType + "]["+ getStatusIcon() +"] " + description + "(at: " + at + ")";
+        return "[" + taskType + "]["+ getStatusIcon() +"] " + description + " (at: " + at + ")";
     }
 }
