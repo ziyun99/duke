@@ -42,15 +42,6 @@ public class Task {
         return taskLetter;
     }
 
-    public void printLine() {
-        System.out.println("    ____________________________________________________________");
-    }
-
-    public void printIndent() {
-        int space = 5;
-        System.out.printf("%" + space + "s", "");
-    }
-
     /*
     public String toFileString() {
         String str;
