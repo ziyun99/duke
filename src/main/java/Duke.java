@@ -1,12 +1,24 @@
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
 
-    private ArrayList<Todo> myTasks;
+    private ArrayList<Task> myTasks = new ArrayList<Task>();
+    FileHandler myFile;
+
+    {
+        try {
+            myFile = new FileHandler();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void main(String[] args) {
-        Duke duke = new Duke();
+
+            Duke duke = new Duke();
+
         duke.hello();
 
         String inData;
@@ -28,8 +40,20 @@ public class Duke {
         }
     }
 
-    public Duke() {
-        this.myTasks = new ArrayList<Todo>();
+    public Duke()  {
+        FileHandler myFile = null;
+        try {
+            myFile = new FileHandler();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Loading data from hard disk...");
+        try {
+            this.myTasks = myFile.loadData();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Load finished...");
     }
 
     public void handleCommand(String inData) throws DukeException {
@@ -61,12 +85,11 @@ public class Duke {
         String[] split = inData.split(" ");
 
         if(split.length == 1) {
-            //this.print("☹ OOPS!!! The description of a todo cannot be empty.");
             throw new DukeException(DukeException.dukeExceptionType.TODO_EMPTY);
         }
 
-        String task = split[1];
-        Todo newTask = new Todo(task);
+        String task = inData.substring(5).strip();
+        Task newTask = new Todo(task);
         myTasks.add(newTask);
 
         printLine();
@@ -89,9 +112,9 @@ public class Duke {
             //this.print("☹ OOPS!!! Incorrect format for deadline.");
             throw new DukeException(DukeException.dukeExceptionType.DEADLINE_FORMAT);
         }
-        String task = splitBy[0];
-        String by = splitBy[1];
-        Todo newTask = new Deadline(task, by);
+        String task = splitBy[0].strip();
+        String by = splitBy[1].strip();
+        Task newTask = new Deadline(task, by);
         myTasks.add(newTask);
 
         printLine();
@@ -104,19 +127,16 @@ public class Duke {
     public void addEvent(String inData) throws DukeException {
         String[] split = inData.split(" ");
 
-        if(split.length == 1) {
-            //this.print("☹ OOPS!!! The description of a event cannot be empty.");
-            throw new DukeException(DukeException.dukeExceptionType.EVENT_EMPTY);
-        }
+        if(split.length == 1) {   }
 
         String[] splitAt = inData.substring(6).split(" /at ");
         if(splitAt.length == 1) {
             //this.print("☹ OOPS!!! Incorrect format for event.");
             throw new DukeException(DukeException.dukeExceptionType.EVENT_FORMAT);
         }
-        String task = splitAt[0];
-        String at = splitAt[1];
-        Todo newTask = new Events(task, at);
+        String task = splitAt[0].strip();
+        String at = splitAt[1].strip();
+        Task newTask = new Events(task, at);
         myTasks.add(newTask);
 
         printLine();
@@ -127,7 +147,7 @@ public class Duke {
     }
 
 
-    public void doneTask(String inData)  throws DukeException{
+    public void doneTask(String inData) throws DukeException{
         String[] split = inData.split(" ");
 
         if(split.length == 1) {
@@ -144,7 +164,7 @@ public class Duke {
         }
 
         if (index > 0 && index <= myTasks.size()) {
-            Todo doneTask = myTasks.get(index - 1);
+            Task doneTask = (Task) myTasks.get(index - 1);
             doneTask.setDone();
             printLine();
             printIndented("Nice! I've marked this task as done: ");
@@ -182,6 +202,9 @@ public class Duke {
     }
 
     public void bye() {
+        System.out.println("\nSaving data to hard disk...");
+        myFile.saveData(myTasks);
+        System.out.println("Save finished...");
         printLine();
         printIndent();
         System.out.println("Bye. Hope to see you again soon!");

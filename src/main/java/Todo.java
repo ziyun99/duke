@@ -1,11 +1,10 @@
 public class Todo extends Task {
 
-    protected String taskType = "T";
+    protected String taskLetter = "T";
     protected boolean isDone;
 
     public Todo(String description) {
-        super(description);
-        isDone = false;
+        super("T", description, null);
     }
 
     public void setDone() {
@@ -22,6 +21,6 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        return "[" + taskType + "][" + getStatusIcon() + "] " + description;
+        return "[" + taskLetter + "][" + getStatusIcon() + "] " + description;
     }
 }

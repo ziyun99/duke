@@ -1,10 +1,10 @@
-public class Events extends Todo {
+public class Events extends Task {
 
-    protected String taskType = "E";
+    protected String taskLetter = "E";
     protected String at;
 
     public Events(String description, String at) {
-        super(description);
+        super("E", description, at);
         this.at = at;
     }
 
@@ -18,6 +18,6 @@ public class Events extends Todo {
 
     @Override
     public String toString() {
-        return "[" + taskType + "]["+ getStatusIcon() +"] " + description + " (at: " + at + ")";
+        return "[" + taskLetter + "]["+ getStatusIcon() +"] " + description + " (at: " + at + ")";
     }
 }

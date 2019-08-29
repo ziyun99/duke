@@ -14,17 +14,17 @@ public class DukeException extends Exception{
     }
     private String errMsg;
 
-    protected final String unknownErrMsg = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
-    protected final String inputEmptyErrMsg = "☹ OOPS!!! Input cannot be empty";
-    protected final String listEmptyErrMsg = "☹ OOPS!!! Your list is empty now.";
-    protected final String doneEmptyErrMsg = "☹ OOPS!!! Index for done cannot be empty.";
-    protected final String intExpectedErrMsg = "☹ OOPS!!! Index for done should be an integer.";
-    protected final String indexOutOfBoundErrMsg = "☹ OOPS!!! Index out of bound.";
-    protected final String todoEmptyErrMsg = "☹ OOPS!!! Todo cannot be empty";
-    protected final String deadlineEmptyErrMsg = "☹ OOPS!!! Deadline cannot be empty.";
-    protected final String deadlineFormatErrMsg = "☹ OOPS!!! Deadline format incorrect.";
-    protected final String eventEmptyErrMsg = "☹ OOPS!!! Event cannot be empty";
-    protected final String eventFormatErrMsg = "☹ OOPS!!! Event format incorrect.";
+    protected final String unknownErrMsg = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n";
+    protected final String inputEmptyErrMsg = "☹ OOPS!!! Input cannot be empty\n";
+    protected final String listEmptyErrMsg = "☹ OOPS!!! Your list is empty now.\n";
+    protected final String doneEmptyErrMsg = "☹ OOPS!!! Index for done cannot be empty.\n";
+    protected final String intExpectedErrMsg = "☹ OOPS!!! Index for done should be an integer.\n";
+    protected final String indexOutOfBoundErrMsg = "☹ OOPS!!! Index out of bound.\n";
+    protected final String todoEmptyErrMsg = "☹ OOPS!!! Todo cannot be empty.\n";
+    protected final String deadlineEmptyErrMsg = "☹ OOPS!!! Deadline cannot be empty.\n";
+    protected final String deadlineFormatErrMsg = "☹ OOPS!!! Deadline format incorrect.\n";
+    protected final String eventEmptyErrMsg = "☹ OOPS!!! Event cannot be empty.\n";
+    protected final String eventFormatErrMsg = "☹ OOPS!!! Event format incorrect.\n";
 
 
     public DukeException(dukeExceptionType errType) {
