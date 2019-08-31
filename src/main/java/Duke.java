@@ -76,7 +76,11 @@ public class Duke {
             } else if (split[0].equals("event")) {
                 this.addEvent(inData);
                 //this.addEvent(inData.substring(6));
-            } else {
+            } else if (split[0].equals("delete")) {
+                this.deleteTask(inData);
+                //this.addEvent(inData.substring(6));
+            }
+            else {
                 throw new DukeException(DukeException.dukeExceptionType.UNKNOWN);
             }
     }
@@ -191,6 +195,36 @@ public class Duke {
         }
         printLine();
 
+    }
+
+    public void deleteTask(String inData) throws DukeException{
+        String[] split = inData.split(" ");
+
+        if(split.length == 1) {
+            //this.print("☹ OOPS!!! The index of done cannot be empty.");
+            throw new DukeException(DukeException.dukeExceptionType.DELETE_EMPTY);
+        }
+
+        int index = 0;
+        try {
+            index = Integer.parseInt(split[1]);
+        } catch (NumberFormatException e) {
+            //this.print("not a number");
+            throw new DukeException(DukeException.dukeExceptionType.INT_EXPECTED);
+        }
+
+        if (index > 0 && index <= myTasks.size()) {
+            Task deleteTask = myTasks.get(index - 1);
+            myTasks.remove(index - 1);
+            printLine();
+            printIndented("Noted. I've removed this task: ");
+            printIndented(deleteTask.toString());
+            printIndented("Now you have " + myTasks.size() + " tasks in the list.");
+            printLine();
+        } else {
+            //this.print("Alert: Index out of range.");
+            throw new DukeException(DukeException.dukeExceptionType.INDEX_OUT_OF_BOUND);
+        }
     }
 
     public void hello() {
