@@ -31,9 +31,12 @@ public class Duke {
     }
 
     public Duke()  {
-        //FileHandler myFile = new FileHandler();
         System.out.println("Loading data from hard disk...");
-        this.myTasks = myFile.loadData();
+        try {
+            this.myTasks = myFile.loadData();
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found, creating a new file for data storage.");
+        }
         System.out.println("Load finished...");
     }
 
@@ -52,6 +55,8 @@ public class Duke {
             this.addDeadline(inData);
         } else if (split[0].equals("event")) {
             this.addEvent(inData);
+        } else if (split[0].equals("find")) {
+            this.findTask(inData);
         } else {
             throw new DukeException(DukeException.dukeExceptionType.UNKNOWN);
         }
@@ -119,6 +124,39 @@ public class Duke {
         printIndented("Got it. I've added this task: ");
         printIndented("  " + newTask.toString());
         printIndented("Now you have " + myTasks.size() + " tasks in the list.");
+        printLine();
+    }
+
+
+
+    public void findTask(String inData) throws DukeException {
+        String[] split = inData.split(" ");
+
+        if (split.length == 1) {
+            throw new DukeException(DukeException.dukeExceptionType.FIND_EMPTY);
+        }
+
+        String keyword = inData.substring(5).strip();
+        ArrayList<Task> findList = new ArrayList<Task>();
+        //Pattern p = Pattern.compile("keyword");   // the pattern to search for
+
+        for (Task task : myTasks) {
+            //Matcher m = p.matcher(task.getDescription());
+            if (task.getDescription().contains(keyword)) {
+                findList.add(task);
+            }
+        }
+        printLine();
+        if (findList.size() == 0) {
+            printIndented("Result: No matching tasks in your list.");
+        } else {
+            printIndented("Here are the matching tasks in your list:");
+            int i = 0;
+            for (Task task : findList) {
+                i++;
+                printIndented(i + "." + task.toString());
+            }
+        }
         printLine();
     }
 
