@@ -38,23 +38,24 @@ public class Duke {
     }
 
     public void handleCommand(String inData) throws DukeException {
-
-        String[] split = inData.split(" ");
-        if (split.length == 0 || inData.equals("")) {
-            throw new DukeException(DukeException.dukeExceptionType.INPUT_EMPTY);
-        } else if (inData.equals("list")) {
-            this.listTask();
-        } else if (split[0].equals("done")) {
-            this.doneTask(inData);
-        } else if (split[0].equals("todo")) {
-            this.addTodo(inData);
-        } else if (split[0].equals("deadline")) {
-            this.addDeadline(inData);
-        } else if (split[0].equals("event")) {
-            this.addEvent(inData);
-        } else {
-            throw new DukeException(DukeException.dukeExceptionType.UNKNOWN);
-        }
+            String[] split = inData.split(" ");
+            if (split.length == 0 || inData.equals("")) {
+                throw new DukeException(DukeException.dukeExceptionType.INPUT_EMPTY);
+            } else if (inData.equals("list")) {
+                this.listTask();
+            } else if (split[0].equals("done")) {
+                this.doneTask(inData);
+            } else if (split[0].equals("todo")) {
+                this.addTodo(inData);
+            } else if (split[0].equals("deadline")) {
+                this.addDeadline(inData);
+            } else if (split[0].equals("event")) {
+                this.addEvent(inData);
+            } else if (split[0].equals("delete")) {
+                this.deleteTask(inData);
+            } else {
+                throw new DukeException(DukeException.dukeExceptionType.UNKNOWN);
+            }
     }
 
     public void addTodo(String inData) throws DukeException {
@@ -120,6 +121,36 @@ public class Duke {
         printIndented("  " + newTask.toString());
         printIndented("Now you have " + myTasks.size() + " tasks in the list.");
         printLine();
+    }
+
+    public void deleteTask(String inData) throws DukeException{
+        String[] split = inData.split(" ");
+
+        if(split.length == 1) {
+            //this.print("? OOPS!!! The index of done cannot be empty.");
+            throw new DukeException(DukeException.dukeExceptionType.DELETE_EMPTY);
+        }
+
+        int index = 0;
+        try {
+            index = Integer.parseInt(split[1].strip());
+        } catch (NumberFormatException e) {
+            //this.print("not a number");
+            throw new DukeException(DukeException.dukeExceptionType.INT_EXPECTED);
+        }
+
+        if (index > 0 && index <= myTasks.size()) {
+            Task deleteTask = myTasks.get(index - 1);
+            myTasks.remove(index - 1);
+            printLine();
+            printIndented("Noted. I've removed this task: ");
+            printIndented(deleteTask.toString());
+            printIndented("Now you have " + myTasks.size() + " tasks in the list.");
+            printLine();
+        } else {
+            //this.print("Alert: Index out of range.");
+            throw new DukeException(DukeException.dukeExceptionType.INDEX_OUT_OF_BOUND);
+        }
     }
 
     public void doneTask(String inData) throws DukeException{
