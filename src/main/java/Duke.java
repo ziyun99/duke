@@ -5,20 +5,10 @@ import java.util.ArrayList;
 public class Duke {
 
     private ArrayList<Task> myTasks = new ArrayList<Task>();
-    FileHandler myFile;
-
-    {
-        try {
-            myFile = new FileHandler();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
+    FileHandler myFile = new FileHandler();;
 
     public static void main(String[] args) {
-
-            Duke duke = new Duke();
-
+        Duke duke = new Duke();
         duke.hello();
 
         String inData;
@@ -41,39 +31,30 @@ public class Duke {
     }
 
     public Duke()  {
-        FileHandler myFile = null;
-        try {
-            myFile = new FileHandler();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        //FileHandler myFile = new FileHandler();
         System.out.println("Loading data from hard disk...");
-        try {
-            this.myTasks = myFile.loadData();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        this.myTasks = myFile.loadData();
         System.out.println("Load finished...");
     }
 
     public void handleCommand(String inData) throws DukeException {
 
-            String[] split = inData.split(" ");
-            if (split.length == 0 || inData.equals("")) {
-                throw new DukeException(DukeException.dukeExceptionType.INPUT_EMPTY);
-            } else if (inData.equals("list")) {
-                this.listTask();
-            } else if (split[0].equals("done")) {
-                this.doneTask(inData);
-            } else if (split[0].equals("todo")) {
-                this.addTodo(inData);
-            } else if (split[0].equals("deadline")) {
-                this.addDeadline(inData);
-            } else if (split[0].equals("event")) {
-                this.addEvent(inData);
-            } else {
-                throw new DukeException(DukeException.dukeExceptionType.UNKNOWN);
-            }
+        String[] split = inData.split(" ");
+        if (split.length == 0 || inData.equals("")) {
+            throw new DukeException(DukeException.dukeExceptionType.INPUT_EMPTY);
+        } else if (inData.equals("list")) {
+            this.listTask();
+        } else if (split[0].equals("done")) {
+            this.doneTask(inData);
+        } else if (split[0].equals("todo")) {
+            this.addTodo(inData);
+        } else if (split[0].equals("deadline")) {
+            this.addDeadline(inData);
+        } else if (split[0].equals("event")) {
+            this.addEvent(inData);
+        } else {
+            throw new DukeException(DukeException.dukeExceptionType.UNKNOWN);
+        }
     }
 
     public void addTodo(String inData) throws DukeException {
@@ -140,7 +121,6 @@ public class Duke {
         printIndented("Now you have " + myTasks.size() + " tasks in the list.");
         printLine();
     }
-
 
     public void doneTask(String inData) throws DukeException{
         String[] split = inData.split(" ");
