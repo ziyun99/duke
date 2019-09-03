@@ -37,15 +37,21 @@ public class FileHandler {
 
     private File myFile;
     private String filepath = "C:\\WSL\\CS2113T\\duke\\data\\duke.txt"; // ./data/duke.txt
+    //private String filepath = "../../../data/duke.txt";
 
-    public FileHandler() throws FileNotFoundException {
+    public FileHandler() {
         //myFile = new File("C:\\WSL\\CS2113T\\duke\\data\\duke.txt");
         //loadData();
     }
 
-    public ArrayList<Task> loadData() throws FileNotFoundException {
+    public ArrayList<Task> loadData(){
         ArrayList<Task> myTasks = new ArrayList<Task>();
-        Scanner scan = new Scanner(new File(this.filepath));
+        Scanner scan = null;
+        try {
+            scan = new Scanner(new File(this.filepath));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         while (scan.hasNext()) {
             myTasks.add(FileStrToTask(scan.nextLine()));
         }
