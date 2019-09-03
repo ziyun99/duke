@@ -11,7 +11,8 @@ public class DukeException extends Exception{
         DEADLINE_FORMAT,
         EVENT_EMPTY,
         EVENT_FORMAT,
-        DELETE_EMPTY;
+        DELETE_EMPTY,
+        FIND_EMPTY;
     }
     private String errMsg;
 
@@ -25,9 +26,9 @@ public class DukeException extends Exception{
     protected final String deadlineEmptyErrMsg = "☹ OOPS!!! <deadline> cannot be empty.\n";
     protected final String deadlineFormatErrMsg = "☹ OOPS!!! <deadline> format incorrect.\n";
     protected final String eventEmptyErrMsg = "☹ OOPS!!! <event> cannot be empty.\n";
-    protected final String eventFormatErrMsg = "☹ OOPS!!! <event>format incorrect.\n";
+    protected final String eventFormatErrMsg = "☹ OOPS!!! <event> format incorrect.\n";
     protected final String deleteEmptyErrMsg = "? OOPS!!! <delete> cannot be empty.\n";
-
+    protected final String findEmptyErrMsg = "☹ OOPS!!! <find> cannot be empty.\n";
 
     public DukeException(dukeExceptionType errType) {
         this.setErrMSg(errType);
@@ -70,6 +71,9 @@ public class DukeException extends Exception{
                 break;
             case DELETE_EMPTY:
                 this.errMsg = deleteEmptyErrMsg;
+                break;
+            case FIND_EMPTY:
+                this.errMsg = findEmptyErrMsg;
                 break;
         }
     }
