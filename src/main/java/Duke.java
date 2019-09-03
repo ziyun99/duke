@@ -60,22 +60,17 @@ public class Duke {
 
             String[] split = inData.split(" ");
             if (split.length == 0 || inData.equals("")) {
-                //this.print("Input is empty.");
                 throw new DukeException(DukeException.dukeExceptionType.INPUT_EMPTY);
             } else if (inData.equals("list")) {
                 this.listTask();
             } else if (split[0].equals("done")) {
                 this.doneTask(inData);
-                //this.doneTask(Integer.parseInt(split[1]));
             } else if (split[0].equals("todo")) {
                 this.addTodo(inData);
-                //this.addTodo(inData.substring(5));
             } else if (split[0].equals("deadline")) {
                 this.addDeadline(inData);
-                //this.addDeadline(inData.substring(9));
             } else if (split[0].equals("event")) {
                 this.addEvent(inData);
-                //this.addEvent(inData.substring(6));
             } else {
                 throw new DukeException(DukeException.dukeExceptionType.UNKNOWN);
             }
