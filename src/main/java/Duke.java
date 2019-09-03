@@ -5,20 +5,10 @@ import java.util.ArrayList;
 public class Duke {
 
     private ArrayList<Task> myTasks = new ArrayList<Task>();
-    FileHandler myFile;
-
-    {
-        try {
-            myFile = new FileHandler();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
+    FileHandler myFile = new FileHandler();;
 
     public static void main(String[] args) {
-
-            Duke duke = new Duke();
-
+        Duke duke = new Duke();
         duke.hello();
 
         String inData;
@@ -41,18 +31,9 @@ public class Duke {
     }
 
     public Duke()  {
-        FileHandler myFile = null;
-        try {
-            myFile = new FileHandler();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        //FileHandler myFile = new FileHandler();
         System.out.println("Loading data from hard disk...");
-        try {
-            this.myTasks = myFile.loadData();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        this.myTasks = myFile.loadData();
         System.out.println("Load finished...");
     }
 
@@ -71,6 +52,8 @@ public class Duke {
                 this.addDeadline(inData);
             } else if (split[0].equals("event")) {
                 this.addEvent(inData);
+            } else if (split[0].equals("delete")) {
+                this.deleteTask(inData);
             } else {
                 throw new DukeException(DukeException.dukeExceptionType.UNKNOWN);
             }
@@ -141,6 +124,35 @@ public class Duke {
         printLine();
     }
 
+    public void deleteTask(String inData) throws DukeException{
+        String[] split = inData.split(" ");
+
+        if(split.length == 1) {
+            //this.print("? OOPS!!! The index of done cannot be empty.");
+            throw new DukeException(DukeException.dukeExceptionType.DELETE_EMPTY);
+        }
+
+        int index = 0;
+        try {
+            index = Integer.parseInt(split[1].strip());
+        } catch (NumberFormatException e) {
+            //this.print("not a number");
+            throw new DukeException(DukeException.dukeExceptionType.INT_EXPECTED);
+        }
+
+        if (index > 0 && index <= myTasks.size()) {
+            Task deleteTask = myTasks.get(index - 1);
+            myTasks.remove(index - 1);
+            printLine();
+            printIndented("Noted. I've removed this task: ");
+            printIndented(deleteTask.toString());
+            printIndented("Now you have " + myTasks.size() + " tasks in the list.");
+            printLine();
+        } else {
+            //this.print("Alert: Index out of range.");
+            throw new DukeException(DukeException.dukeExceptionType.INDEX_OUT_OF_BOUND);
+        }
+    }
 
     public void doneTask(String inData) throws DukeException{
         String[] split = inData.split(" ");

@@ -10,7 +10,8 @@ public class DukeException extends Exception{
         DEADLINE_EMPTY,
         DEADLINE_FORMAT,
         EVENT_EMPTY,
-        EVENT_FORMAT;
+        EVENT_FORMAT,
+        DELETE_EMPTY;
     }
     private String errMsg;
 
@@ -18,13 +19,14 @@ public class DukeException extends Exception{
     protected final String inputEmptyErrMsg = "☹ OOPS!!! Input cannot be empty\n";
     protected final String listEmptyErrMsg = "☹ OOPS!!! Your list is empty now.\n";
     protected final String doneEmptyErrMsg = "☹ OOPS!!! Index for done cannot be empty.\n";
-    protected final String intExpectedErrMsg = "☹ OOPS!!! Index for done should be an integer.\n";
+    protected final String intExpectedErrMsg = "☹ OOPS!!! Index for <done> or <delete> should be an integer.\n";
     protected final String indexOutOfBoundErrMsg = "☹ OOPS!!! Index out of bound.\n";
-    protected final String todoEmptyErrMsg = "☹ OOPS!!! Todo cannot be empty.\n";
-    protected final String deadlineEmptyErrMsg = "☹ OOPS!!! Deadline cannot be empty.\n";
-    protected final String deadlineFormatErrMsg = "☹ OOPS!!! Deadline format incorrect.\n";
-    protected final String eventEmptyErrMsg = "☹ OOPS!!! Event cannot be empty.\n";
-    protected final String eventFormatErrMsg = "☹ OOPS!!! Event format incorrect.\n";
+    protected final String todoEmptyErrMsg = "☹ OOPS!!! <todo> cannot be empty.\n";
+    protected final String deadlineEmptyErrMsg = "☹ OOPS!!! <deadline> cannot be empty.\n";
+    protected final String deadlineFormatErrMsg = "☹ OOPS!!! <deadline> format incorrect.\n";
+    protected final String eventEmptyErrMsg = "☹ OOPS!!! <event> cannot be empty.\n";
+    protected final String eventFormatErrMsg = "☹ OOPS!!! <event>format incorrect.\n";
+    protected final String deleteEmptyErrMsg = "? OOPS!!! <delete> cannot be empty.\n";
 
 
     public DukeException(dukeExceptionType errType) {
@@ -66,7 +68,9 @@ public class DukeException extends Exception{
             case EVENT_FORMAT:
                 this.errMsg = eventFormatErrMsg;
                 break;
-
+            case DELETE_EMPTY:
+                this.errMsg = deleteEmptyErrMsg;
+                break;
         }
     }
 
