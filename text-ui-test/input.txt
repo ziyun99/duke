@@ -1,0 +1,10 @@
+list
+todo eat lunch
+deadline assignment /by 12/9/2019 2359
+event meeting /at 11/9/2019 1400
+list 
+done 2
+delete 1
+list
+done   
+bye
