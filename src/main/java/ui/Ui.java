@@ -1,5 +1,7 @@
 package ui;
 
+import exception.DukeException;
+
 import java.util.Scanner;
 
 public class Ui {

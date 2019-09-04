@@ -1,6 +1,11 @@
 package command;
 
-import
+import TaskList.TaskList;
+import exception.DukeException;
+import storage.Storage;
+import task.Task;
+import task.Todo;
+import ui.Ui;
 
 public class TodoCommand extends Command {
 
@@ -10,8 +15,6 @@ public class TodoCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        isExit = false;
-
         String[] split = inData.split(" ");
         if(split.length == 1) {
             throw new DukeException(DukeException.dukeExceptionType.TODO_EMPTY);

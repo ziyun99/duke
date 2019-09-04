@@ -42,10 +42,6 @@ public class Duke {
                 ui.printError(e);
             }
         }
-        System.out.println("\nSaving data to hard disk...");
-        storage.saveData(tasks);
-        System.out.println("Save finished...");
-        ui.printBye();
     }
 
     public static void main(String[] args) {
