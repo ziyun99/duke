@@ -1,11 +1,10 @@
-import java.util.ArrayList;
+package ui;
+
 import java.util.Scanner;
 
 public class Ui {
 
-
     public Ui () {
-
     }
 
     public void printHello() {

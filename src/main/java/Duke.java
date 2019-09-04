@@ -1,3 +1,9 @@
+import TaskList.TaskList;
+import command.Command;
+import exception.DukeException;
+import storage.Storage;
+import ui.Ui;
+
 import java.io.FileNotFoundException;
 
 public class Duke {
@@ -28,8 +34,9 @@ public class Duke {
         while (!isExit) {
             try {
                 String inData = ui.readInput();
-                parser.handleCommand(inData, tasks);
-                isExit = parser.isExit();
+                Command c = parser.handleCommand(inData);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
                 System.out.println("");
             } catch (DukeException e) {
                 ui.printError(e);

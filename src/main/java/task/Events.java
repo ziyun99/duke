@@ -1,3 +1,7 @@
+package task;
+
+import task.Task;
+
 public class Events extends Task {
 
     protected String taskLetter = "E";

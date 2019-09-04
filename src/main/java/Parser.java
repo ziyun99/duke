@@ -1,62 +1,52 @@
+import command.Command;
+import command.TodoCommand;
+import exception.DukeException;
+import task.Deadline;
+import task.Events;
+import task.Task;
+
 import java.util.ArrayList;
 
 public class Parser {
 
-    private Ui ui;
-    private TaskList tasks;
-
-    private boolean isExit;
-
     public Parser () {
-        ui = new Ui();
-        isExit = false;
-    }
-    public boolean isExit () {
-        return this.isExit;
     }
 
-    public void handleCommand(String inData, TaskList tasks) throws DukeException {
-        this.tasks = tasks;
+    public Command handleCommand(String inData) throws DukeException {
+//        this.tasks = tasks;
         String[] split = inData.split(" ");
         if (split.length == 0 || inData.equals("")) {
             throw new DukeException(DukeException.dukeExceptionType.INPUT_EMPTY);
-        } else if (inData.equals("list")) {
-            this.listTask();
-        } else if (split[0].equals("done")) {
-            this.doneTask(inData);
-        } else if (split[0].equals("todo")) {
-            this.addTodo(inData);
-        } else if (split[0].equals("deadline")) {
-            this.addDeadline(inData);
-        } else if (split[0].equals("event")) {
-            this.addEvent(inData);
-        } else if (split[0].equals("delete")) {
-            this.deleteTask(inData);
-        } else if (split[0].equals("find")) {
-            this.findTask(inData);
-        } else if (split[0].equals("bye")) {
-            this.isExit = true;
-        } else {
-            throw new DukeException(DukeException.dukeExceptionType.UNKNOWN);
         }
-    }
-
-    public void addTodo(String inData) throws DukeException {
-        String[] split = inData.split(" ");
-
-        if(split.length == 1) {
-            throw new DukeException(DukeException.dukeExceptionType.TODO_EMPTY);
+        switch (split[0])  {
+            case "list":
+                return new ListCommand(inData);
+                break;
+            case "done":
+                return new DoneCommand(inData);
+                break;
+            case "todo":
+                return new TodoCommand(inData);
+                break;
+            case "deadline":
+                return new DeadlineCommand(inData);
+                break;
+            case "event":
+                return new EventCommand(inData);
+                break;
+            case "delete":
+                return new DeleteCommand(inData);
+                break;
+            case "find":
+                return new FindCommand(inData);
+            break;
+            case "bye":
+                return new ByeCommand(inData);
+                break;
+            default:
+                throw new DukeException(DukeException.dukeExceptionType.UNKNOWN);
+                //return new UnkownCommand();
         }
-
-        String task = inData.substring(5).strip();
-        Task newTask = new Todo(task);
-        tasks.getTaskList().add(newTask);
-
-        ui.printLine();
-        ui.printIndented("Got it. I've added this task: ");
-        ui.printIndented("  " + newTask.toString());
-        ui.printIndented("Now you have " + tasks.getTaskList().size() + " tasks in the list.");
-        ui.printLine();
     }
 
     public void addDeadline(String inData) throws DukeException {
