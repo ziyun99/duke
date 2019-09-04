@@ -2,36 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.util.ArrayList;
-//import java.util.Formatter;
 import java.util.Scanner;
-
-/*
-public class FileHandler {
-
-    public static void main(String[] args) {
-        File myFile = new File("C:\\WSL\\CS2113T\\duke\\data\\duke.txt");
-
-        if (myFile.exists()) {
-            System.out.println("ok");
-        } else {
-            System.out.println("error");
-        }
-    }
-}
-public class FileHandler {
-
-    public static void main(String[] args) {
-        final Formatter x;
-
-        try {
-            x = new Formatter("test.txt");
-            System.out.println("file created");
-        } catch (Exception e) {
-            System.out.println("error");
-        }
-    }
-}
-*/
 
 public class FileHandler {
 
@@ -39,8 +10,6 @@ public class FileHandler {
     private String filepath = "C:\\WSL\\CS2113T\\duke\\data\\duke.txt";
 
     public FileHandler() {
-        //myFile = new File("C:\\WSL\\CS2113T\\duke\\data\\duke.txt");
-        //loadData();
     }
 
     public ArrayList<Task> loadData() throws FileNotFoundException {

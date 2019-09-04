@@ -16,7 +16,7 @@ public class Duke {
 
         while(true) {
             try {
-                inData = scan.nextLine();
+                inData = scan.nextLine().strip();
                 if (!inData.equals("bye")) {
                     duke.handleCommand(inData);
                 } else {
@@ -85,13 +85,11 @@ public class Duke {
         String[] split = inData.split(" ");
 
         if(split.length == 1) {
-            //this.print("☹ OOPS!!! The description of a deadline cannot be empty.");
             throw new DukeException(DukeException.dukeExceptionType.DEADLINE_EMPTY);
         }
 
         String[] splitBy = inData.substring(9).split(" /by ");
         if(splitBy.length == 1) {
-            //this.print("☹ OOPS!!! Incorrect format for deadline.");
             throw new DukeException(DukeException.dukeExceptionType.DEADLINE_FORMAT);
         }
         String task = splitBy[0].strip();
@@ -113,7 +111,6 @@ public class Duke {
 
         String[] splitAt = inData.substring(6).split(" /at ");
         if(splitAt.length == 1) {
-            //this.print("☹ OOPS!!! Incorrect format for event.");
             throw new DukeException(DukeException.dukeExceptionType.EVENT_FORMAT);
         }
         String task = splitAt[0].strip();
@@ -132,7 +129,6 @@ public class Duke {
         String[] split = inData.split(" ");
 
         if (split.length == 1) {
-            //this.print("? OOPS!!! The index of done cannot be empty.");
             throw new DukeException(DukeException.dukeExceptionType.DELETE_EMPTY);
         }
 
@@ -140,7 +136,6 @@ public class Duke {
         try {
             index = Integer.parseInt(split[1].strip());
         } catch (NumberFormatException e) {
-            //this.print("not a number");
             throw new DukeException(DukeException.dukeExceptionType.INT_EXPECTED);
         }
 
@@ -153,7 +148,6 @@ public class Duke {
             printIndented("Now you have " + myTasks.size() + " tasks in the list.");
             printLine();
         } else {
-            //this.print("Alert: Index out of range.");
             throw new DukeException(DukeException.dukeExceptionType.INDEX_OUT_OF_BOUND);
         }
     }
@@ -167,10 +161,8 @@ public class Duke {
 
         String keyword = inData.substring(5).strip();
         ArrayList<Task> findList = new ArrayList<Task>();
-        //Pattern p = Pattern.compile("keyword");   // the pattern to search for
 
         for (Task task : myTasks) {
-            //Matcher m = p.matcher(task.getDescription());
             if (task.getDescription().contains(keyword)) {
                 findList.add(task);
             }
@@ -193,15 +185,13 @@ public class Duke {
         String[] split = inData.split(" ");
 
         if(split.length == 1) {
-            //this.print("☹ OOPS!!! The index of done cannot be empty.");
             throw new DukeException(DukeException.dukeExceptionType.DONE_EMPTY);
         }
 
         int index = 0;
         try {
-            index = Integer.parseInt(split[1]);
+            index = Integer.parseInt(split[1].strip());
         } catch (NumberFormatException e) {
-            //this.print("not a number");
             throw new DukeException(DukeException.dukeExceptionType.INT_EXPECTED);
         }
 
@@ -213,7 +203,6 @@ public class Duke {
             printIndented(doneTask.toString());
             printLine();
         } else {
-            //this.print("Alert: Index out of range.");
             throw new DukeException(DukeException.dukeExceptionType.INDEX_OUT_OF_BOUND);
         }
     }
