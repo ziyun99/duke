@@ -1,19 +1,20 @@
 import java.util.ArrayList;
 
-public class CommandParser {
+public class Parser {
 
     private Ui ui;
     private TaskList tasks;
 
     private boolean isExit;
 
-    public CommandParser () {
+    public Parser () {
         ui = new Ui();
         isExit = false;
     }
     public boolean isExit () {
         return this.isExit;
     }
+
     public void handleCommand(String inData, TaskList tasks) throws DukeException {
         this.tasks = tasks;
         String[] split = inData.split(" ");

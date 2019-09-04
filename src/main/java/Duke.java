@@ -5,12 +5,12 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-    private CommandParser commandParser;
+    private Parser parser;
 
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
-        commandParser = new CommandParser();
+        parser = new Parser();
         try {
             System.out.println("Loading data from hard disk...");
             tasks = new TaskList(storage.load());
@@ -28,8 +28,8 @@ public class Duke {
         while (!isExit) {
             try {
                 String inData = ui.readInput();
-                commandParser.handleCommand(inData, tasks);
-                isExit = commandParser.isExit();
+                parser.handleCommand(inData, tasks);
+                isExit = parser.isExit();
                 System.out.println("");
             } catch (DukeException e) {
                 ui.printError(e);
