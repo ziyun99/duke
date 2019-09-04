@@ -4,15 +4,16 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class FileHandler {
+public class Storage {
 
     private File myFile;
-    private String filepath = "C:\\WSL\\CS2113T\\duke\\data\\duke.txt";
+    private String filepath; //"C:\\WSL\\CS2113T\\duke\\data\\duke.txt";
 
-    public FileHandler() {
+    public Storage(String filepath) {
+        this.filepath = filepath;
     }
 
-    public ArrayList<Task> loadData() throws FileNotFoundException {
+    public ArrayList<Task> load() throws FileNotFoundException {
         ArrayList<Task> myTasks = new ArrayList<Task>();
         Scanner scan = null;
         try {
@@ -26,8 +27,9 @@ public class FileHandler {
         return myTasks;
     }
 
-    public void saveData(ArrayList<Task> myTasks) {
+    public void saveData(TaskList tasks) {
         try{
+            ArrayList<Task> myTasks = tasks.getTaskList();
             FileWriter fw = new FileWriter(filepath);
             for (Task task : myTasks) {
                 fw.write(taskToFileStr(task));
