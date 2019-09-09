@@ -1,3 +1,5 @@
+package parser;
+
 import command.*;
 import exception.DukeException;
 

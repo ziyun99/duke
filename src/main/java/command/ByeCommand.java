@@ -1,6 +1,6 @@
 package command;
 
-import TaskList.TaskList;
+import task.TaskList;
 import exception.DukeException;
 import storage.Storage;
 import ui.Ui;
