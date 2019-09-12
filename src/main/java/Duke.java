@@ -9,7 +9,7 @@ import parser.Parser;
 import java.io.FileNotFoundException;
 
 /**
- * Main class Duke
+ * Main class Duke.
  */
 public class Duke {
 
@@ -19,7 +19,7 @@ public class Duke {
     private Parser parser;
 
     /**
-     * Constructor for class Duke
+     * Constructor for class Duke.
      */
     public Duke(String filePath) {
         ui = new Ui();
@@ -37,10 +37,8 @@ public class Duke {
     }
 
     /**
-     * Main run method.
-     * Start the program by welcoming the user,
-     * then read user input, parse and process the input command.
-     * lastly exits the program when "bye" is inputted.
+     * Main run method. Start the program by welcoming the user, then read user input, parse and process the
+     * input command. lastly exits the program when "bye" is inputted.
      */
     public void run() {
         ui.printHello();
@@ -59,7 +57,7 @@ public class Duke {
     }
 
     /**
-     * Main method in Duke class
+     * Main method in Duke class.
      */
     public static void main(String[] args) {
         new Duke("../../../data/tasks.txt").run();

@@ -22,12 +22,12 @@ public class Deadline extends Task {
         this.by = by;
     }
 
-    public String getBy () {
+    public String getBy() {
         return by;
     }
 
     @Override
     public String toString() {
-        return "[" + taskLetter + "]["+ getStatusIcon() +"] " + description + " (by: " + by + ")";
+        return "[" + taskLetter + "][" + getStatusIcon() + "] " + description + " (by: " + by + ")";
     }
 }

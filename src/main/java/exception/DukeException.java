@@ -1,6 +1,6 @@
 package exception;
 
-public class DukeException extends Exception{
+public class DukeException extends Exception {
     public enum dukeExceptionType {
         UNKNOWN,
         INPUT_EMPTY,
@@ -16,6 +16,7 @@ public class DukeException extends Exception{
         DELETE_EMPTY,
         FIND_EMPTY;
     }
+
     private String errMsg;
 
     protected final String unknownErrMsg = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n";
@@ -38,45 +39,45 @@ public class DukeException extends Exception{
 
     private void setErrMSg(dukeExceptionType errType) {
         switch (errType) {
-            case UNKNOWN:
-                this.errMsg = unknownErrMsg;
-                break;
-            case INPUT_EMPTY:
-                this.errMsg = inputEmptyErrMsg;
-                break;
-            case LIST_EMPTY:
-                this.errMsg = listEmptyErrMsg;
-                break;
-            case DONE_EMPTY:
-                this.errMsg = doneEmptyErrMsg;
-                break;
-            case INT_EXPECTED:
-                this.errMsg = intExpectedErrMsg;
-                break;
-            case INDEX_OUT_OF_BOUND:
-                this.errMsg = indexOutOfBoundErrMsg;
-                break;
-            case TODO_EMPTY:
-                this.errMsg = todoEmptyErrMsg;
-                break;
-            case DEADLINE_EMPTY:
-                this.errMsg = deadlineEmptyErrMsg;
-                break;
-            case DEADLINE_FORMAT:
-                this.errMsg = deadlineFormatErrMsg;
-                break;
-            case EVENT_EMPTY:
-                this.errMsg = eventEmptyErrMsg;
-                break;
-            case EVENT_FORMAT:
-                this.errMsg = eventFormatErrMsg;
-                break;
-            case DELETE_EMPTY:
-                this.errMsg = deleteEmptyErrMsg;
-                break;
-            case FIND_EMPTY:
-                this.errMsg = findEmptyErrMsg;
-                break;
+        case UNKNOWN:
+            this.errMsg = unknownErrMsg;
+            break;
+        case INPUT_EMPTY:
+            this.errMsg = inputEmptyErrMsg;
+            break;
+        case LIST_EMPTY:
+            this.errMsg = listEmptyErrMsg;
+            break;
+        case DONE_EMPTY:
+            this.errMsg = doneEmptyErrMsg;
+            break;
+        case INT_EXPECTED:
+            this.errMsg = intExpectedErrMsg;
+            break;
+        case INDEX_OUT_OF_BOUND:
+            this.errMsg = indexOutOfBoundErrMsg;
+            break;
+        case TODO_EMPTY:
+            this.errMsg = todoEmptyErrMsg;
+            break;
+        case DEADLINE_EMPTY:
+            this.errMsg = deadlineEmptyErrMsg;
+            break;
+        case DEADLINE_FORMAT:
+            this.errMsg = deadlineFormatErrMsg;
+            break;
+        case EVENT_EMPTY:
+            this.errMsg = eventEmptyErrMsg;
+            break;
+        case EVENT_FORMAT:
+            this.errMsg = eventFormatErrMsg;
+            break;
+        case DELETE_EMPTY:
+            this.errMsg = deleteEmptyErrMsg;
+            break;
+        case FIND_EMPTY:
+            this.errMsg = findEmptyErrMsg;
+            break;
         }
     }
 

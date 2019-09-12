@@ -16,12 +16,12 @@ public class Events extends Task {
         this.at = at;
     }
 
-    public String getAt () {
+    public String getAt() {
         return at;
     }
 
     @Override
     public String toString() {
-        return "[" + taskLetter + "]["+ getStatusIcon() +"] " + description + " (at: " + at + ")";
+        return "[" + taskLetter + "][" + getStatusIcon() + "] " + description + " (at: " + at + ")";
     }
 }

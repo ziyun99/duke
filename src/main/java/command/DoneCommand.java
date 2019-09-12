@@ -6,7 +6,7 @@ import storage.Storage;
 import task.Task;
 import ui.Ui;
 
-public class DoneCommand extends Command{
+public class DoneCommand extends Command {
     public DoneCommand(String inData) {
         super(inData);
     }
@@ -15,7 +15,7 @@ public class DoneCommand extends Command{
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String[] split = inData.split(" ");
 
-        if(split.length == 1) {
+        if (split.length == 1) {
             throw new DukeException(DukeException.dukeExceptionType.DONE_EMPTY);
         }
 

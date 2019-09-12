@@ -5,15 +5,15 @@ import exception.DukeException;
 import java.util.Scanner;
 
 /**
- * User interface code which interacts with user.
- * Responsible for every user input and output printing except for those exception handling.
+ * User interface code which interacts with user. Responsible for every user input and output printing except
+ * for those exception handling.
  */
 public class Ui {
 
     /**
      * Constructor for class Ui.
      */
-    public Ui () {
+    public Ui() {
     }
 
     /**
@@ -45,9 +45,9 @@ public class Ui {
      * Read user input from the terminal.
      */
     public String readInput() {
-            Scanner scan = new Scanner(System.in);
-            String inData = scan.nextLine().strip();
-            return inData;
+        Scanner scan = new Scanner(System.in);
+        String inData = scan.nextLine().strip();
+        return inData;
     }
 
     /**
@@ -58,8 +58,7 @@ public class Ui {
     }
 
     /**
-     * Print string message in a particular output format
-     * with top and bottom horizontal line.
+     * Print string message in a particular output format with top and bottom horizontal line.
      */
     public void print(String output) {
         this.printLine();

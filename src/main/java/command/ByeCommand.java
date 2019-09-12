@@ -20,8 +20,4 @@ public class ByeCommand extends Command {
         ui.printBye();
     }
 
-//    @Override
-//    public boolean isExit() {
-//        return true;
-//    }
 }

@@ -1,8 +1,8 @@
 package task;
 
 import java.util.Date;
-        import java.text.SimpleDateFormat;
-        import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
 
 public class DateTimeParser {
 

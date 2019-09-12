@@ -18,10 +18,11 @@ public class EventCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String[] split = inData.split(" ");
 
-        if(split.length == 1) {   }
+        if (split.length == 1) {
+        }
 
         String[] splitAt = inData.substring(6).split(" /at ");
-        if(splitAt.length == 1) {
+        if (splitAt.length == 1) {
             throw new DukeException(DukeException.dukeExceptionType.EVENT_FORMAT);
         }
         String description = splitAt[0].strip();

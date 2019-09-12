@@ -16,7 +16,7 @@ public class TodoCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String[] split = inData.split(" ");
-        if(split.length == 1) {
+        if (split.length == 1) {
             throw new DukeException(DukeException.dukeExceptionType.TODO_EMPTY);
         }
 
