@@ -8,19 +8,36 @@ import task.Task;
 import task.Todo;
 import ui.Ui;
 
+/**
+ * EventCommand class contains helper functions for creating event task.
+ */
 public class EventCommand extends Command {
 
+    /**
+     * EventCommand class Constructor.
+     *
+     * @param inData the user input that triggers this command.
+     */
     public EventCommand(String inData) {
         super(inData);
     }
 
+    /**
+     * This function creates Event object by parsing the user input to get task information, and print
+     * out relevant updated message.
+     *
+     * @param tasks TaskList object.
+     * @param ui Ui object that manages user interactions.
+     * @param storage Storage object that manages local data access.
+     * @throws DukeException if there is error in user input.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String[] split = inData.split(" ");
 
         if (split.length == 1) {
+            throw new DukeException(DukeException.dukeExceptionType.EVENT_EMPTY);
         }
-
         String[] splitAt = inData.substring(6).split(" /at ");
         if (splitAt.length == 1) {
             throw new DukeException(DukeException.dukeExceptionType.EVENT_FORMAT);

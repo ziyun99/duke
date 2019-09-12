@@ -7,11 +7,29 @@ import task.Deadline;
 import task.Task;
 import ui.Ui;
 
+/**
+ * DeadlineCommand class contains helper functions for creating deadline task.
+ */
 public class DeadlineCommand extends Command {
+
+    /**
+     * DeadlineCommand class Constructor.
+     *
+     * @param inData the user input that triggers this command.
+     */
     public DeadlineCommand(String inData) {
         super(inData);
     }
 
+    /**
+     * This function creates Deadline object by parsing the user input to get task information, and print
+     * out relevant updated message.
+     *
+     * @param tasks TaskList object.
+     * @param ui Ui object that manages user interactions.
+     * @param storage Storage object that manages local data access.
+     * @throws DukeException if there is error in user input.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         isExit = false;

@@ -1,15 +1,35 @@
 package parser;
 
-import command.*;
+import command.ByeCommand;
+import command.Command;
+import command.DeadlineCommand;
+import command.DeleteCommand;
+import command.DoneCommand;
+import command.EventCommand;
+import command.FindCommand;
+import command.ListCommand;
+import command.TodoCommand;
 import exception.DukeException;
 
+/**
+ * Parser class parse the user input command and determine which type of command should be executed later.
+ */
 public class Parser {
 
+    /**
+     * Parser class Constructor.
+     */
     public Parser() {
     }
 
+    /**
+     * This function takes in the users input string and parse it, then return the respective Command object.
+     *
+     * @param inData the user's input string/
+     * @return Command object to be executed later.
+     * @throws DukeException is thrown if the user input is empty or unknown.
+     */
     public Command handleCommand(String inData) throws DukeException {
-//        this.tasks = tasks;
         String[] split = inData.split(" ");
         if (split.length == 0 || inData.equals("")) {
             throw new DukeException(DukeException.dukeExceptionType.INPUT_EMPTY);

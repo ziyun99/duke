@@ -6,11 +6,28 @@ import storage.Storage;
 import task.Task;
 import ui.Ui;
 
+/**
+ * DoneCommand class contains helper functions for marking a task as done.
+ */
 public class DoneCommand extends Command {
+
+    /**
+     * DoneCommand class Constructor.
+     *
+     * @param inData the user input that triggers this command.
+     */
     public DoneCommand(String inData) {
         super(inData);
     }
 
+    /**
+     * This function mark a task from the taskList as done.
+     *
+     * @param tasks TaskList object.
+     * @param ui Ui object that manages user interactions.
+     * @param storage Storage object that manages local data access.
+     * @throws DukeException if there is error in user input.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String[] split = inData.split(" ");

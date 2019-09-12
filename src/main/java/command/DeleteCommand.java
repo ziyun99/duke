@@ -6,12 +6,28 @@ import storage.Storage;
 import task.Task;
 import ui.Ui;
 
+/**
+ * DeleteCommand class contains helper functions for deleting task.
+ */
 public class DeleteCommand extends Command {
 
+    /**
+     * DeleteCommand class Constructor.
+     *
+     * @param inData the user input that triggers this command.
+     */
     public DeleteCommand(String inData) {
         super(inData);
     }
 
+    /**
+     * This function delete a task from the taskList.
+     *
+     * @param tasks TaskList object.
+     * @param ui Ui object that manages user interactions.
+     * @param storage Storage object that manages local data access.
+     * @throws DukeException if there is error in user input.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String[] split = inData.split(" ");
@@ -28,7 +44,8 @@ public class DeleteCommand extends Command {
         }
 
         if (index > 0 && index <= tasks.getTaskList().size()) {
-            Task deleteTask = tasks.getTaskList().get(index - 1);
+            Task deleteTask;
+            deleteTask = tasks.getTaskList().get(index - 1);
             tasks.getTaskList().remove(index - 1);
             ui.printLine();
             ui.printIndented("Noted. I've removed this task: ");

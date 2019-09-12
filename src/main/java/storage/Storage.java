@@ -34,7 +34,7 @@ public class Storage {
      * tasks.
      *
      * @return An array list of tasks, which will be passed into TaskList.
-     * @throws FileNotFoundException is thrown if the file of the specified file path is not found.
+     * @throws FileNotFoundException if the file of the specified file path is not found.
      * @see TaskList
      * @see Task
      */

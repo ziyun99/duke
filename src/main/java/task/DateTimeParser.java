@@ -4,6 +4,9 @@ import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
 
+/**
+ * DateTimeParser Class parses the date or time.
+ */
 public class DateTimeParser {
 
     private Date date;
@@ -14,6 +17,11 @@ public class DateTimeParser {
     private int hour;
     private int minutes;
 
+    /**
+     * DateTimeParser Class Constructor
+     *
+     * @param inDate the datetime input by the user.
+     */
     public DateTimeParser(String inDate) {
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
@@ -25,6 +33,11 @@ public class DateTimeParser {
         }
     }
 
+    /**
+     * Get the formatted string of the datetime.
+     *
+     * @return the formatted string of the datetime.
+     */
     public String toString() {
         return date.toString();
         //return this.dateFormat.format(this.date);

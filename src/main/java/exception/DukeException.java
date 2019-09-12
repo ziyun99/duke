@@ -1,5 +1,8 @@
 package exception;
 
+/**
+ * DukeException class inherits Exception class and contains list of custom exceptions for Duke program.
+ */
 public class DukeException extends Exception {
     public enum dukeExceptionType {
         UNKNOWN,
@@ -32,11 +35,20 @@ public class DukeException extends Exception {
     protected final String eventFormatErrMsg = "☹ OOPS!!! <event> format incorrect.\n";
     protected final String deleteEmptyErrMsg = "? OOPS!!! <delete> cannot be empty.\n";
     protected final String findEmptyErrMsg = "☹ OOPS!!! <find> cannot be empty.\n";
+    protected final String defaultErrMsg = "☹ OOPS!!! error !\n";
 
+    /**
+     * DukeException class Constructor.
+     *
+     * @param errType the type of exception.
+     */
     public DukeException(dukeExceptionType errType) {
         this.setErrMSg(errType);
     }
 
+    /**
+     * This function set the error message to be displayed when the type of DukeException is thrown.
+     */
     private void setErrMSg(dukeExceptionType errType) {
         switch (errType) {
         case UNKNOWN:
@@ -78,9 +90,17 @@ public class DukeException extends Exception {
         case FIND_EMPTY:
             this.errMsg = findEmptyErrMsg;
             break;
+        default:
+            this.errMsg = defaultErrMsg;
+            break;
         }
     }
 
+    /**
+     * This function returns the string expression for the DukeException object.
+     *
+     *  @return the string expression for the DukeException object.
+     */
     @Override
     public String toString() {
         return this.errMsg;

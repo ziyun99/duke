@@ -8,12 +8,28 @@ import ui.Ui;
 
 import java.util.ArrayList;
 
+/**
+ * FindCommand class contains helper functions for finding task.
+ */
 public class FindCommand extends Command {
 
+    /**
+     * EventCommand class Constructor.
+     *
+     * @param inData the user input that triggers this command.
+     */
     public FindCommand(String inData) {
         super(inData);
     }
 
+    /**
+     * This function find tasks that contains keyword given by the user input, and print out the find result.
+     *
+     * @param tasks TaskList object.
+     * @param ui Ui object that manages user interactions.
+     * @param storage Storage object that manages local data access.
+     * @throws DukeException if there is error in user input.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String[] split = inData.split(" ");
